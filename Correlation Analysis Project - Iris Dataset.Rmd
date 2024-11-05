@@ -33,13 +33,26 @@ table
   border-collapse: collapse;
 }
 
-img {
+img 
+{
   display: block;         /* Make the image a block element */
   margin-left: auto;     /* Automatically adjust left margin */
   margin-right: auto;    /* Automatically adjust right margin */
   border: 2px solid #333;
 }
+
+pre
+{
+  background-color: #EEEEEE;
+  border: 2px solid #333;
+}
 ```
+
+```{r Importing the iris dataset and other libraries, echo=FALSE, message=FALSE, warning=FALSE}
+iris <- read.csv("D:\\USCB CSCI\\SEM 7\\Data Visualization\\Homework\\Correlation-Analysis-Project_Iris-Dataset\\dataset\\Iris.csv")
+library(tidyverse)
+```
+
 
 ***
 # 🌸 Correlation Analysis Project - Iris Dataset 🌸
@@ -56,7 +69,7 @@ The dataset comprises four features that describe the physical dimensions of the
 
 The Iris dataset is frequently used as a beginner’s dataset for data analysis and machine learning because of its simplicity, balanced classes, and linearly separable nature. It serves as a great example for demonstrating various classification algorithms, such as k-nearest neighbors (k-NN), support vector machines (SVM), and logistic regression. Its historical significance and ease of use make it a staple in introductory courses on statistics, machine learning, and data science.
 
-The objective of this project is to develop a technical report that investigates the relationships between pairs of variables in the Iris dataset. By examining these associations, the report aims to reveal how different physical attributes of iris flowers, such as sepal and petal dimensions, are interrelated across the three species. To achieve this, meaningful visualizations like scatter plots will be utilized, providing an intuitive way to observe potential trends and correlations in the data. Additionally, Pearson’s correlation coefficient will be calculated for each pair of variables, quantifying the strength and direction of linear associations. This analysis will offer insights into the underlying patterns within the dataset and highlight any significant relationships among the 
+The objective of this project is to develop a technical report that investigates the relationships between pairs of variables in the Iris dataset. By examining these associations, the report aims to reveal how different physical attributes of iris flowers, such as sepal and petal dimensions, are interrelated across the three species. To achieve this, meaningful visualizations like scatter plots will be utilized, providing an intuitive way to observe potential trends and correlations in the data. Additionally, Pearson’s correlation coefficient will be calculated for each pair of variables, quantifying the strength and direction of linear associations. This analysis will offer insights into the underlying patterns within the dataset and highlight any significant relationships among the variables.
 
 <br>
 <figure>
@@ -68,4 +81,76 @@ The objective of this project is to develop a technical report that investigates
 ## **2. Dataset Summary**
 ***
 
-This section focuses on providing the summary and descriptions of the Iris dataset. We take a deeper look into the data by exploring the various features (columns), and observations (rows) inorder to get an idea about the dataset. We also delve into the metadata, for eg. looking at the data-types of the dataset to gain an idea about the structure of the data. We will also be looking at various statistical descriptors that will give us a greater understanding about the datasets features.
+In this section, we provide a comprehensive summary and description of the Iris dataset to gain a foundational understanding of its structure and content.
+
+To better understand this dataset, we explore these features individually to examine the distributions and ranges within each species. This process involves looking at observations (or rows), which correspond to individual flowers, and allows us to identify patterns and variances in the measurements across species.
+
+Additionally, we analyze the dataset's metadata to examine the data types of each column and better understand the dataset's structure. This step is essential for validating the integrity of the data, ensuring that each feature is stored in a format that allows for accurate analysis.
+
+Furthermore, we delve into statistical descriptors such as the mean, median, standard deviation, minimum, and maximum values for each feature. These descriptors provide valuable insights into the overall distribution of the data, revealing tendencies within each species, identifying potential outliers, and highlighting differences between the three iris species.
+
+### **2.1 Importing and understanding the dataset**
+***
+
+We must start of this project by importing the dataset. In the project's folder their exists a file called "Iris.csv", this file contains all the 150 observations done by Robert A. Fisher. We have pulled this dataset from Kaggle, the title for the dataset is "<a href="https://www.kaggle.com/datasets/uciml/iris">Iris Species</a>", and originally belongs to UC Irvine Machine Learning (UCIML) Repository. We import the dataset by the following code:
+
+```r
+iris <- read.csv("D:\\USCB CSCI\\SEM 7\\Data Visualization\\Homework\\Correlation-Analysis-Project_Iris-Dataset\\dataset\\Iris.csv")
+```
+
+Here we have imported the iris dataset in to the iris data variable, we can further check the type of iris by using the iris function. Note there are more ways to import the dataset, we have used a download csv here, other way is to include through an url. We can clearly see from below that the iris dataset is of the data frame data structure.
+
+```{r checking iris variable type}
+  class(iris)
+```
+
+Now we explore into the data set by observing information placed in the head and tail of the dataset.
+
+```{r checking head and tail}
+  head(iris)
+  tail(iris)
+```
+
+Through this we can already see that there are 5 data columns, and 1 column that represents the index number for a particular observation that is "Id". The "Id" column is insignificant for analyzing the relations between two variables, but still gives us the understanding about how many rows exist in the data. Lets formally validate that the observation and feature count are consitent with our understanding.
+
+```{r checking count of rows and columns}
+  paste("Number of columns: ",ncol(iris))
+  paste("Number of rows: ",nrow(iris))
+```
+
+We can now confim that there are indeed 150 observations in the dataset. There are 6 variables here, as discussed above the id column is only used for indexing, so there are 5 columns that matter to us validating that observation too. To observe the datatypes of the columns we can simply convert our data.frame to a tibble. A tibble is a modernized data.frame (according to <a href="https://tibble.tidyverse.org/">tidyverse</a>), that works similarly to a data.frame but has additional features. One additional feature that will help us is that the tibble display the datatypes of each column above their respective column headers, so we will not have to check for each columns datatype individually.
+
+```{r tibble and datatypes}
+  iris <- as_tibble(iris)
+  head(iris)
+```
+
+We can observe that the "Id" is an <int> or integer, the 4 physical features of the Iris are <dbl> or doubles according to tibbles, one can simply think about them as double-precision floating point numerics. Finally the target variable (a.k.a the label) is of type <chr> or character. This represents the type of flower the particular observation represents.
+
+Note that since this is a very popular and small datasets the data in it is already clean, this means that the data has a low amount of errors and that it has no missing values. It is highly recommended that with any dataset one must always explore the data and get familiar with the dataset, and take appropriate measures to clean the data.
+
+### **2.2 Five Number Summary and more**
+***
+
+We will now use the `summary()` function of data.frame to get more understating about the distribution of our data, this will give us the five-number summary for the quantitative variables and counts of the categorical variables. We will be excluding the id column here since it is insignificant.
+
+```{r five number summary and more}
+  summary(iris[, -c(1)])
+```
+
+This summary shows us the statics for each of the physical feature. The statistics include the minimum and maximum values from the columns, along with their central tendancies in the form of mean and median, we also get the Interquartile range (IQR) for each feature. The IQRs help us understand how the data is clustered and can also hep us identify outliers. Outliers are often data points that fall below Q1 - 1.5/IQR or above Q3 + 1.5/IQR. Also, the frequencies of the categorical variables are displayed for them.
+
+## **3. Plotting Data**
+***
+
+In this section, we will analyze the relationships between the variables in the Iris dataset by plotting scatterplots. Scatterplots are a fundamental visualization tool in data analysis, offering an intuitive way to examine potential correlations between pairs of variables. By plotting the data points for each pair of variables, we can directly observe patterns, trends, and possible associations, providing insight into the nature of the relationships within the dataset.
+
+Each scatterplot will display one pair of variables on the x- and y-axes, with individual points representing observations of iris flowers. These visualizations will allow us to assess whether there is a positive correlation (where both variables increase together), a negative correlation (where one variable increases as the other decreases), or no correlation (where there is no apparent relationship between the two variables). Scatterplots also allow us to identify clusters or groups in the data and highlight any potential outliers, which could indicate interesting patterns or anomalies in the dataset.
+
+We will further enhance our scatterplots by coloring or shaping points according to the species of the iris flower (e.g., Iris setosa, Iris versicolor, Iris virginica). This approach will help us observe if the relationship between variables is consistent across different species or if it varies significantly. For instance, certain species may exhibit stronger correlations between specific measurements, like Petal Length and Petal Width, compared to others.
+
+By visually exploring these scatterplots, we can develop preliminary insights into the correlations between variables. These observations will then set the stage for more formal statistical analysis, including calculating Pearson’s correlation coefficients to quantify the strength and direction of these relationships. This visualization step is essential in data analysis, as it allows us to recognize patterns and relationships that may not be immediately apparent from numerical data alone.
+
+
+### **3.1 Scatterplots**
+***
