@@ -1,0 +1,69 @@
+---
+output: html_document
+---
+
+```{css, echo=FALSE}
+/* CSS code to style the HTML*/
+
+h1 
+{
+  font-size: 42px;
+}
+
+hr 
+{
+  border: none;
+  border-top: 3px dashed #3B1E54;
+  color: #3B1E54;
+  background-color: #CDC1FF;
+  height: 1px;
+  margin: 20px 0;
+}
+
+body
+{
+  background: #CDC1FF;
+  color: #3B1E54
+}
+
+table
+{
+  padding: 10px 0px
+  border: 2px solid #333;
+  border-collapse: collapse;
+}
+
+img {
+  display: block;         /* Make the image a block element */
+  margin-left: auto;     /* Automatically adjust left margin */
+  margin-right: auto;    /* Automatically adjust right margin */
+  border: 2px solid #333;
+}
+```
+
+***
+# 🌸 Correlation Analysis Project - Iris Dataset 🌸
+***
+
+## **1. Introduction**
+***
+
+The iris flower is a stunning and diverse genus of flowering plants known for its vibrant colors and intricate petal formations. Named after the Greek goddess of the rainbow, Iris, this flower comes in a wide range of colors, including purple, blue, yellow, and white, and symbolizes wisdom, hope, and valor in various cultures.
+
+The Iris dataset, introduced by British statistician and biologist Ronald A. Fisher in 1936, is one of the most well-known datasets in data science and machine learning. This classic dataset contains 150 observations of iris flowers, with three species represented: Iris setosa, Iris versicolor, and Iris virginica. Fisher used this dataset to illustrate the concept of linear discriminant analysis, a method for distinguishing between categories or classes.
+
+The dataset comprises four features that describe the physical dimensions of the iris flowers: sepal length, sepal width, petal length, and petal width, all measured in centimeters. These features were chosen because they provide valuable information for distinguishing between the three iris species, which are visually similar yet have distinct differences in petal and sepal structure.
+
+The Iris dataset is frequently used as a beginner’s dataset for data analysis and machine learning because of its simplicity, balanced classes, and linearly separable nature. It serves as a great example for demonstrating various classification algorithms, such as k-nearest neighbors (k-NN), support vector machines (SVM), and logistic regression. Its historical significance and ease of use make it a staple in introductory courses on statistics, machine learning, and data science.
+
+The objective of this project is to develop a technical report that investigates the relationships between pairs of variables in the Iris dataset. By examining these associations, the report aims to reveal how different physical attributes of iris flowers, such as sepal and petal dimensions, are interrelated across the three species. To achieve this, meaningful visualizations like scatter plots will be utilized, providing an intuitive way to observe potential trends and correlations in the data. Additionally, Pearson’s correlation coefficient will be calculated for each pair of variables, quantifying the strength and direction of linear associations. This analysis will offer insights into the underlying patterns within the dataset and highlight any significant relationships among the 
+
+<br>
+<figure>
+  <img src="images/iris.jpg" alt="Iris Flower" width="900px" height="189px">
+  <br>
+  <center><figcaption>Figure 1: An Iris flower</figcaption><center>
+</figure>
+
+## **2. Dataset Summary**
+***
