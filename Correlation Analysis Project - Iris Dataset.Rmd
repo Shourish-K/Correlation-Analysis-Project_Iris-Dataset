@@ -67,3 +67,5 @@ The objective of this project is to develop a technical report that investigates
 
 ## **2. Dataset Summary**
 ***
+
+This section focuses on providing the summary and descriptions of the Iris dataset. We take a deeper look into the data by exploring the various features (columns), and observations (rows) inorder to get an idea about the dataset. We also delve into the metadata, for eg. looking at the data-types of the dataset to gain an idea about the structure of the data. We will also be looking at various statistical descriptors that will give us a greater understanding about the datasets features.
