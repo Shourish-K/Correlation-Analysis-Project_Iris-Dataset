@@ -39,8 +39,6 @@ img
   margin-left: auto;     /* Automatically adjust left margin */
   margin-right: auto;    /* Automatically adjust right margin */
   border: 2px solid #333;
-}
-
 pre
 {
   background-color: #EEEEEE;
@@ -140,6 +138,12 @@ We will now use the `summary()` function of data.frame to get more understating 
 
 This summary shows us the statics for each of the physical feature. The statistics include the minimum and maximum values from the columns, along with their central tendancies in the form of mean and median, we also get the Interquartile range (IQR) for each feature. The IQRs help us understand how the data is clustered and can also hep us identify outliers. Outliers are often data points that fall below Q1 - 1.5/IQR or above Q3 + 1.5/IQR. Also, the frequencies of the categorical variables are displayed for them.
 
+<figure>
+  <img src="images/iris.jpg" alt="Iris Flower" width="900px" height="189px">
+  <br>
+  <center><figcaption>Figure 1: An Iris flower</figcaption><center>
+</figure>
+
 ## **3. Plotting Data**
 ***
 
@@ -154,3 +158,128 @@ By visually exploring these scatterplots, we can develop preliminary insights in
 
 ### **3.1 Scatterplots**
 ***
+```{r List of variables, echo=FALSE}
+  variables <- colnames(iris)[2:5]  # All quantitative variables
+```
+
+#### **3.1.1 SepalLengthCM vs SepalWidthCM**
+***
+
+The relationship between Sepal Length and Sepal Width in the Iris dataset reveals a weak, slightly negative correlation, indicating that these two variables are not strongly dependent on each other.
+
+```{r Plot1, echo=FALSE, message=FALSE, warning=FALSE}
+  p <- ggplot(iris, mapping = aes_string(x = variables[1], y = variables[2])) +
+    geom_point(mapping = aes(color = iris$Species)) +
+    geom_smooth(method="lm") +
+    labs(title = paste("Scatterplot of", variables[1], "vs", variables[2]),
+         x = variables[1],
+         y = variables[2],
+         color = "Species")
+  p
+```
+
+ A scatterplot of SepalLengthCM versus SepalWidthCM, colored by species, shows that Iris setosa forms a distinct cluster with relatively shorter sepal lengths and wider sepal widths compared to the other species. In contrast, Iris versicolor and Iris virginica display greater overlap, both showing generally longer sepal lengths and narrower widths than setosa. This distinction suggests that sepal dimensions vary by species, with setosa being notably different from the others, while versicolor and virginica exhibit similar sepal characteristics. The low correlation coefficient between Sepal Length and Sepal Width supports the visual observation that changes in one measurement do not predict changes in the other. Overall, the differences in sepal dimensions contribute to distinguishing Iris setosa from the other species but are less helpful in differentiating versicolor and virginica.
+<br>
+<br>
+
+#### **3.1.2 SepalLengthCM vs PetalLengthCM**
+***
+
+
+The relationship between Sepal Length and Petal Length in the Iris dataset exhibits a strong positive correlation, indicating that as Sepal Length increases, Petal Length also tends to increase. 
+
+```{r Plot2, echo=FALSE, message=FALSE, warning=FALSE}
+  p <- ggplot(iris, mapping = aes_string(x = variables[1], y = variables[3])) +
+    geom_point(mapping = aes(color = iris$Species)) +
+    geom_smooth(method="lm") +
+    labs(title = paste("Scatterplot of", variables[1], "vs", variables[3]),
+         x = variables[1],
+         y = variables[3],
+         color = "Species")
+  p
+```
+
+A scatterplot of SepalLengthCM versus PetalLengthCM, colored by species, illustrates this trend clearly across the three iris species. Iris setosa forms a distinct cluster with shorter sepals and petals, positioned at the lower end of the dimensions, while Iris versicolor and Iris virginica display progressively longer sepal and petal lengths, with virginica reaching the highest measurements. This pattern suggests that Sepal Length and Petal Length are not only strongly associated but also increase systematically from setosa to versicolor to virginica, making them effective variables for distinguishing between the species. The high positive Pearson correlation coefficient further supports this strong relationship, indicating that Sepal Length and Petal Length vary together in a meaningful way. Overall, these features reveal distinct species-specific trends, making them valuable markers for identifying iris species based on their morphological characteristics.
+<br>
+<br>
+
+#### **3.1.3 SepalLengthCM vs PetalWidthCM**
+***
+
+The relationship between Sepal Length and Petal Width in the Iris dataset demonstrates a moderately strong positive correlation, indicating that as Sepal Length increases, Petal Width generally increases as well.
+
+```{r Plot3, echo=FALSE, message=FALSE, warning=FALSE}
+  p <- ggplot(iris, mapping = aes_string(x = variables[1], y = variables[4])) +
+    geom_point(mapping = aes(color = iris$Species)) +
+    geom_smooth(method="lm") +
+    labs(title = paste("Scatterplot of", variables[1], "vs", variables[4]),
+         x = variables[1],
+         y = variables[4],
+         color = "Species")
+  p
+```
+
+A scatterplot of SepalLengthCM versus PetalWidthCM, colored by species, clearly illustrates this trend and highlights the distinctions across the three iris species. Iris setosa forms a compact cluster at the lower end of both sepal length and petal width, showing the smallest measurements, while Iris versicolor occupies a mid-range position with moderate sepal and petal sizes. Iris virginica, on the other hand, has the largest dimensions, forming a separate cluster at the higher end of the scatterplot. This pattern suggests that Petal Width and Sepal Length vary in a species-specific way, with a consistent progression from setosa to versicolor to virginica. The calculated Pearson correlation coefficient supports this positive relationship, indicating that the association is statistically significant. Overall, the moderate to strong correlation and clear species-specific clusters reveal that Sepal Length and Petal Width are valuable features for distinguishing between iris species based on their morphological characteristics.
+<br>
+<br>
+
+#### **3.1.4 SepalWidthCM vs PetalLengthCM**
+***
+
+
+The relationship between Sepal Width and Petal Length in the Iris dataset reveals a weak to moderate negative correlation, suggesting that as Sepal Width increases, Petal Length tends to decrease slightly, though this trend is not very pronounced.
+
+```{r Plot4, echo=FALSE, message=FALSE, warning=FALSE}
+  p <- ggplot(iris, mapping = aes_string(x = variables[2], y = variables[3])) +
+    geom_point(mapping = aes(color = iris$Species)) +
+    geom_smooth(method="lm") +
+    labs(title = paste("Scatterplot of", variables[2], "vs", variables[3]),
+         x = variables[2],
+         y = variables[3],
+         color = "Species")
+  p
+```
+
+A scatterplot of SepalWidthCM versus PetalLengthCM, colored by species, visually highlights this relationship and underscores differences among the three iris species. Iris setosa forms a distinct cluster with wider sepals and shorter petals, positioned toward the upper left of the plot. Iris versicolor occupies a middle range, with moderate values for both sepal width and petal length, while Iris virginica has narrower sepals and longer petals, forming a cluster toward the lower right. These species-specific patterns suggest that Sepal Width and Petal Length vary in ways that can help distinguish between species: setosa typically has the widest sepals and shortest petals, while virginica has the narrowest sepals and longest petals. Although the overall Pearson correlation coefficient is low, confirming a weak inverse relationship, these features remain valuable for differentiating species based on their distinct morphological characteristics.
+<br>
+<br>
+
+#### **3.1.5 SepalWidthCM vs PetalWidthCM**
+***
+
+The relationship between Sepal Width and Petal Width in the Iris dataset shows a very weak or nearly nonexistent correlation, suggesting that these two variables are largely independent of each other
+
+```{r Plot5, echo=FALSE, message=FALSE, warning=FALSE}
+  p <- ggplot(iris, mapping = aes_string(x = variables[2], y = variables[4])) +
+    geom_point(mapping = aes(color = iris$Species)) +
+    geom_smooth(method="lm") +
+    labs(title = paste("Scatterplot of", variables[2], "vs", variables[4]),
+         x = variables[2],
+         y = variables[4],
+         color = "Species")
+  p
+```
+
+A scatterplot of SepalWidthCM versus PetalWidthCM, colored by species, visually highlights this lack of association and reveals differences across the three iris species. Iris setosa forms a distinct cluster with wider sepals and narrower petals, positioned in the upper left region of the plot. Iris versicolor occupies the central area with moderate values for both sepal and petal widths, while Iris virginica tends to have narrower sepals and relatively wider petals, positioned toward the lower right. Although there is no strong correlation between Sepal Width and Petal Width, as confirmed by a Pearson correlation coefficient close to zero, these species-specific clusters still provide valuable distinctions. This clustering helps differentiate setosa from the other species, particularly given its characteristic of wide sepals and narrow petals. Overall, while Sepal Width and Petal Width do not have a meaningful linear relationship, their individual patterns across species offer insights useful for species classification in the Iris dataset.
+<br>
+<br>
+
+#### **3.1.6 PetalLengthCM vs PetalWidthCM**
+***
+
+The relationship between Petal Length and Petal Width in the Iris dataset demonstrates a strong positive correlation, indicating that as Petal Length increases, Petal Width also tends to increase. 
+
+```{r Plot6, echo=FALSE, message=FALSE, warning=FALSE}
+  p <- ggplot(iris, mapping = aes_string(x = variables[3], y = variables[4])) +
+    geom_point(mapping = aes(color = iris$Species)) +
+    geom_smooth(method="lm") +
+    labs(title = paste("Scatterplot of", variables[3], "vs", variables[4]),
+         x = variables[3],
+         y = variables[4],
+         color = "Species")
+  p
+```
+
+A scatterplot of PetalLengthCM versus PetalWidthCM, colored by species, vividly highlights this close association and shows clear distinctions among the three iris species. Iris setosa forms a distinct cluster at the lower end of the plot, with both shorter and narrower petals compared to the other species. Iris versicolor occupies the middle range, displaying moderate petal length and width, while Iris virginica has the longest and widest petals, forming a cluster at the upper right. These species-specific patterns indicate that Petal Length and Petal Width are highly characteristic of each species, with clear separations among setosa, versicolor, and virginica. The high Pearson correlation coefficient supports this strong linear relationship, suggesting that these two petal measurements are closely related. Overall, Petal Length and Petal Width provide an effective basis for distinguishing between the species, making them valuable features for classification based on petal morphology.
+<br>
+<br>
